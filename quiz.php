@@ -31,7 +31,7 @@
         <div>
             
             <?php
-            $odp = $con->query("SELECT `id`, `Treść` FROM `odpowiedzi` 
+            $odp = $con->query("SELECT `id`, `Treść`,`Poprawna` FROM `odpowiedzi` 
                                 JOIN pytania_has_odpowiedzi ON pytania_has_odpowiedzi.Odpowiedzi_id=odpowiedzi.id
                                 WHERE pytania_has_odpowiedzi.Pytania_id = $los");
             
@@ -40,9 +40,9 @@
             ';
             $wypodp = $odp->fetch_all(MYSQLI_ASSOC);
                 for($i=0; $i<count($wypodp); $i++){
-                    echo '<input type="checkbox" name="'.$wypodp[$i]["id"].'">'.$wypodp[$i]["Treść"]."<br>";
+                    echo '<input type="checkbox" name='.$wypodp[$i]["id"].' value="'.$wypodp[$i]["Poprawna"].'">'.$wypodp[$i]["Treść"]."<br>";
                 }
-            echo '<input type="submit">';
+            echo '<button type="submit">Sprawdź</button>';
             echo '</form>';
             print_r($_POST);
                 
