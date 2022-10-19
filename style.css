@@ -34,3 +34,7 @@ button {
     width: 60%;
     min-height: 80px;
 }
+button:hover{
+    background-color: red;
+}
+    

@@ -35,10 +35,16 @@
                                 JOIN pytania_has_odpowiedzi ON pytania_has_odpowiedzi.Odpowiedzi_id=odpowiedzi.id
                                 WHERE pytania_has_odpowiedzi.Pytania_id = $los");
             
+            echo '<form method="POST">
+            <input type="hidden" name="question" value="'.$los.'"/>
+            ';
             $wypodp = $odp->fetch_all(MYSQLI_ASSOC);
                 for($i=0; $i<count($wypodp); $i++){
-                    echo "<button>".$wypodp[$i]["Treść"]."</button><br>";
+                    echo '<input type="checkbox" name="'.$wypodp[$i]["id"].'">'.$wypodp[$i]["Treść"]."<br>";
                 }
+            echo '<input type="submit">';
+            echo '</form>';
+            print_r($_POST);
                 
             
          
