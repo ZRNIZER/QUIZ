@@ -14,13 +14,24 @@
         
         <div class="pytanie">
         <?php
+            $tablica=[];
             $con = new mysqli("localhost", "root", "", "mydb");
-            $ile = $con->query("Select count(id) FROM pytania");
+            $ile = $con->query("SELECT count(id) FROM pytania");
             $max = $ile->fetch_array()[0];
-            $los = rand(1, $max);
+            $questions=[];
+            if(isset($_POST["pytania"])){
+                $questions=unserialize($_POST["pytania"]);
+            }
+//            }else{
+                     $los = rand(1, $max);
+//            while(count($questions)<5){
+//                if ()
+//            }
+//            }
             
+           
             
-            $zap = $con->query("Select id, treść FROM pytania WHERE id=$los");
+            $zap = $con->query("SELECT id, treść FROM pytania WHERE id=$los");
             $wyp = $zap->fetch_all(MYSQLI_ASSOC);
                 for($i=0;$i<count($wyp); $i++){
                     echo $wyp[$i]["treść"]."<br>";
@@ -37,14 +48,22 @@
             
             echo '<form method="POST">
             <input type="hidden" name="question" value="'.$los.'"/>
-            ';
+            <input type="hidden" name="pytania" value="'.serialize($questions).'"/>';
             $wypodp = $odp->fetch_all(MYSQLI_ASSOC);
                 for($i=0; $i<count($wypodp); $i++){
-                    echo '<input type="checkbox" name='.$wypodp[$i]["id"].' value="'.$wypodp[$i]["Poprawna"].'">'.$wypodp[$i]["Treść"]."<br>";
+                    echo '<input type="checkbox" name="'.$wypodp[$i]["id"].'" value="'.$wypodp[$i]["Poprawna"].'">'.$wypodp[$i]["Treść"]."<br>";
                 }
             echo '<button type="submit">Sprawdź</button>';
             echo '</form>';
             print_r($_POST);
+            
+            if(isset($los)){
+                $los=0;
+            }else{
+                if (isset($los["Poprawna"])){
+                    $Poprawna=$los["Poprawna"];
+                }
+            }
                 
             
          

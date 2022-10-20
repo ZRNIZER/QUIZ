@@ -33,8 +33,8 @@ button {
     border-radius: 15px;
     width: 60%;
     min-height: 80px;
+    color: black;
 }
 button:hover{
     background-color: red;
 }
-    
