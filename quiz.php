@@ -26,7 +26,7 @@
             setcookie("pytania",$count);
             
             $tablica=[];
-            $con = new mysqli("localhost", "root", "", "mydb");
+            $con = new mysqli("localhost", "root", "", "mdb12");
             $ile = $con->query("SELECT count(id) FROM pytania");
             $max = $ile->fetch_array()[0];
             $questions=[];
